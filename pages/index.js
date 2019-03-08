@@ -1,9 +1,9 @@
-import DefaultLayout from '../hocs/defaultLayout';
+import { defaultLayout } from '../hocs/layouts';
 import PostLink from '../components/post-link/';
 import fetch from 'isomorphic-unfetch';
 
-const App = (props) => (
-  <DefaultLayout>
+const App = defaultLayout((props) => (
+  <div>
     <h1>Batman TV Shows</h1>
     <ul>
       {props.shows.map(({show}) => (
@@ -12,8 +12,8 @@ const App = (props) => (
         </li>
       ))}
     </ul>
-  </DefaultLayout>
-)
+  </div>
+))
 
 App.getInitialProps = async function() {
   const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');

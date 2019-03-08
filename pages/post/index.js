@@ -1,13 +1,13 @@
 import { withRouter } from 'next/router';
-import DefaultLayout from '../../hocs/defaultLayout';
+import { protectedLayout } from '../../hocs/layouts';
 
-const Post = withRouter((props) => (
-  <DefaultLayout>
+const Post = protectedLayout(withRouter((props) => (
+  <div>
     <h1>{props.show.name}</h1>
     <p>{props.show.summary.replace(/<[/]?p>/g, '')}</p>
     <img src={props.show.image.medium}/>
-  </DefaultLayout>
-))
+  </div>
+)))
 
 Post.getInitialProps = async function (context) {
   const { id } = context.query
@@ -18,6 +18,5 @@ Post.getInitialProps = async function (context) {
 
   return { show }
 }
-
 
 export default Post;
